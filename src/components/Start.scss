@@ -1,0 +1,43 @@
+.start {
+  width: 647px;
+  height: 510px;
+  background: linear-gradient(122.18deg, rgba(113, 65, 129, 0.8) 1.31%, rgba(59, 24, 85, 0.8) 99.01%);
+  border-width: 1.8px;
+  border-style: solid;
+  backdrop-filter: blur(4.25758px);
+  text-align: center;
+  padding-top: 56px;
+  transition: all ease 0.9s;
+  border-color: #AB7833;
+  border-radius: 10px;
+  img {
+    width: 236px;
+    height: 158px;
+  }
+
+  p {
+    margin-top: 33px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 31px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  button {
+    cursor: pointer;
+    margin-top: 82px;
+    background: linear-gradient(180deg, #E4C889 0%, #AB7833 100%);
+    box-shadow: 0px 4px 20px rgba(199, 129, 255, 0.25);
+    border-radius: 10px;
+    padding: 17px 90px;
+    border: none;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 31px;
+    color: #FFFFFF;
+    font-style: normal;
+
+  }
+}
