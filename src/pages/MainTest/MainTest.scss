@@ -1,9 +1,20 @@
 .main__test {
   padding: 50px 150px;
   font-family: 'Lexend';
+  position: relative;
 }
-
+.main__test__header{
+  
+  padding: 50px 100px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #fff ;
+}
 .main__test__title {
+  max-width: 1620px;
+  margin: 0 auto;
   font-family: 'Lexend';
   text-align: center;
   padding: 23px;
@@ -17,6 +28,8 @@
 }
 
 .main__test__time {
+  max-width: 1620px;
+  margin: 0 auto;
   margin-top: 30px;
   display: block;
   text-align: center;
@@ -30,7 +43,8 @@
 
 .test__step {
   margin-top: 20px;
-
+  max-width: 1620px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
 
@@ -44,7 +58,9 @@
 }
 
 .test__step__list {
+
   margin-left: 30px;
+  
   list-style-type: none;
   display: flex;
   justify-content: space-between;
@@ -76,12 +92,15 @@
 }
 
 .test__list {
+  max-width: 1275px;
+  margin: 0 auto;
+  margin-top: 300px;
   list-style-type: none;
 }
 
 .test__item {
   margin-top: 50px;
-  padding: 20px;
+  padding:  20px 0;
   height: 308px;
   background: #FFFFFF;
   box-shadow: 0px 4px 20px rgba(11, 167, 191, 0.2);
@@ -90,6 +109,11 @@
 .test__item__title {
   display: flex;
   align-items: center;
+  padding-left: 20px;
+  font-style: normal;
+font-weight: 300;
+font-size: 24px;
+line-height: 30px;
   strong{
     font-size: 20px;
     font-weight: 600;
@@ -106,4 +130,42 @@
     margin-top: 15px;
     padding: 4px 0;
   }
+}
+
+.test__finsh__btn{
+  background: #5E12DA;
+  box-shadow: 0px 10px 20px rgba(11, 167, 191, 0.2);
+  border-radius: 10px;
+  width: 455px ;
+  padding: 25px 0;
+  margin: 0 auto;
+  margin-top: 100px;
+  text-align: center;
+  display: block;
+  color: white;
+  border: none;
+}
+
+.test__item__variant{
+  
+  font-style: normal;
+font-weight: 300;
+font-size: 24px;
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+  padding: 0 20px !important;
+  label{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+    width: 100% !important;
+  }
+  input{
+    display: none;
+  }
+}
+.item__variant__active{
+  background: rgba(0, 24, 244, 0.2);
 }

@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Category.scss'
 import threeD from '../assets/img/3d.png'
 import frontend from '../assets/img/frontend.png'
 import backend from '../assets/img/backend.png'
 import uiux from '../assets/img/ui-ux.png'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 const data = [
   {
     id: 1,
@@ -49,8 +50,20 @@ const data = [
 
 ]
 function Category() {
+  const selector = useDispatch()
   const navigate = useNavigate()
-  const categoryHandler = () => {
+  const location = useLocation().pathname
+  const dipach = useSelector((state) => state)
+  console.log(dipach);
+  useEffect(() => {
+    if (false) {
+      navigate('/')
+    }
+  },[location])
+
+  const categoryHandler = (e) => {
+    console.log(e);
+    selector({type: 'CATEGORY', payload: {'category': e}});
     navigate('/login')
   }
 return (
@@ -59,7 +72,7 @@ return (
     <ul className="category__list">
       {
         data && data.map(({id, title, img}) => (
-          <li onClick={categoryHandler} key={id} className='category__item'>
+          <li onClick={()=> categoryHandler(title)} key={id} className='category__item'>
             <img src={img} alt="" />
             <p>{title}</p>
             <div className="shadow"></div>

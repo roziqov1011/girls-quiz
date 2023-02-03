@@ -18,7 +18,7 @@
   }
 
   .form {
-
+    position: relative;
     display: block;
     width: 320px;
     margin: 0 auto;
@@ -60,5 +60,50 @@
       text-align: center;
       color: #FFFFFF;
     }
+  }
+}
+
+
+.warning_diseble{
+  display: none;
+}
+
+.warning_active{
+  color: yellow;
+  width: 100%;
+  text-align: center;
+  transform: translateY(20px);
+  animation: warning 0.4s  linear both;
+  opacity: 0;
+  letter-spacing: 2px;
+  font-size: 18px;
+  position: absolute;
+  left: 10px;
+  top: 80px;
+}
+
+.warning_active1{
+  color: yellow;
+  width: 100%;
+  text-align: center;
+  transform: translateY(20px);
+  animation: warning 0.4s  linear both;
+  opacity: 0;
+  letter-spacing: 2px;
+  font-size: 18px;
+  position: absolute;
+  left: 10px;
+  top: 60px;
+}
+
+
+
+@keyframes warning {
+  80%{
+    opacity: 0.1;
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
   }
 }

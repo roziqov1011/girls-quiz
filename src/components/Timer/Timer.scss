@@ -1,21 +1,14 @@
-.main__test__time {
- display: flex !important;
- justify-content: space-between;
- align-items: center;
-  border: 1px solid red;
-  width: 200px;
-
-  span {
-    width: 50px;
-  }
-
-  p {
-    animation: effects 1s infinite;
-  }
+.timer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes effects {
-  100% {
-    color: transparent;
+.timer > div{
+  width: 100px !important;
+  height: 100px !important;
+  svg{
+    width: 100px !important;
+    height: 100px !important;
   }
 }
