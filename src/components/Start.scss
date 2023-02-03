@@ -41,3 +41,23 @@
 
   }
 }
+
+.start{
+  perspective:900px;
+}
+
+.start__logo{
+  transform-style: preserve-3d;
+  animation: logoLup 4s infinite linear;
+}
+
+@keyframes logoLup {
+
+  50%{
+    transform: rotateX(360deg) rotateY(0deg);
+  }
+  
+  100%{
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}

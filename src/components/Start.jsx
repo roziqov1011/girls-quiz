@@ -10,7 +10,7 @@ function Start() {
   }
   return (
     <div className='start'>
-      <img src={logo} alt="" />
+      <img className='start__logo' src={logo} alt="logo" />
       <p>Digital Girls 2</p>
       <button onClick={startHandler}>Boshlash</button>
     </div>
