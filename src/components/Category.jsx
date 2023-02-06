@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Category.scss'
 import threeD from '../assets/img/3d.png'
 import frontend from '../assets/img/frontend.png'
@@ -6,6 +6,7 @@ import backend from '../assets/img/backend.png'
 import uiux from '../assets/img/ui-ux.png'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { http, http_api } from '../api';
 const data = [
   {
     id: 1,
@@ -50,31 +51,43 @@ const data = [
 
 ]
 function Category() {
+  const [courseData, setCourseData] = useState([])
+  console.log(courseData)
+
   const selector = useDispatch()
   const navigate = useNavigate()
   const location = useLocation().pathname
   const dipach = useSelector((state) => state)
-  console.log(dipach);
   useEffect(() => {
     if (false) {
       navigate('/')
     }
   },[location])
 
+
+  useEffect(() => {
+    fetch(`${http_api}/course/`)
+      .then((res) => res.json())
+    .then((data)=> setCourseData(data))
+  },[])
   const categoryHandler = (e) => {
-    console.log(e);
     selector({type: 'CATEGORY', payload: {'category': e}});
-    navigate('/login')
+    navigate('/login');
+
+   
+    
+    
   }
+  
 return (
 <div className='category'>
   <h2>Yonalish tanlang</h2>
     <ul className="category__list">
       {
-        data && data.map(({id, title, img}) => (
-          <li onClick={()=> categoryHandler(title)} key={id} className='category__item'>
-            <img src={img} alt="" />
-            <p>{title}</p>
+        courseData && courseData.map(({id, name, logo}) => (
+          <li onClick={()=> categoryHandler(id)} key={id} className='category__item'>
+            <img src={`${http+logo}`} alt="" />
+            <p>{name}</p>
             <div className="shadow"></div>
           </li>
           ))

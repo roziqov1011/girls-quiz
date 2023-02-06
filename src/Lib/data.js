@@ -1,4 +1,4 @@
-export const testData = [
+export const Data = [
   {
     id: 1,
     title: '5 + 6 = ? javobni toping',

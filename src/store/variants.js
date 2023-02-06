@@ -3,6 +3,7 @@ const initialState = [
         fullName: '',
         phone:'',
         category: '',
+        apiCoursId: '',
         result:undefined
     }
 ]
@@ -17,9 +18,12 @@ const Variants = (state=initialState, action) =>{
         
         case 'CATEGORY':
             state[0].category = item.category
-            return state
+            return state;
         case 'RESULT':
             state[0].result = item.result
+            return state;
+        case 'COURSEID':
+            state[0].apiCoursId = item.courseId
             return state
         default:
             return state
