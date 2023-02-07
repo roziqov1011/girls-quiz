@@ -27,19 +27,20 @@ const logicStep = myData.map((item) => (
   ))
 function Logical({ data }) {
   const [count, setCount] = useState(0)
+  const [step, setStep] = useState([])
   console.log(data);
   useEffect(() => {
-  
-  }, )
+    setStep(logicStep);
+  }, [count])
 
 
   const getLogicAnswer = (e) => {
     e.preventDefault()
     console.log(e.target.id);
-    
+    setCount(count + 1)
     logicStep.find((item)=> item.id == e.target.id).answer = e.target.logicAnswer.value
-    console.log(e.target.logicAnswer.value);
     console.log(logicStep);
+    setStep(logicStep);
 
   }
   
@@ -51,7 +52,7 @@ function Logical({ data }) {
         <h3>fan turi</h3>
         <ul className='test__step__list'>
             {
-              logicStep && logicStep.map((item, index) => (
+              step && step.map((item, index) => (
                 <li key={index} className={item.answer.length > 0 ? 'test__step__active' : 'test__step__item'}>{index}</li>
               ))
             }
