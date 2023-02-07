@@ -7,6 +7,7 @@ import uiux from '../assets/img/ui-ux.png'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { http, http_api } from '../api';
+import Lodading from './Lodading/Lodading'
 const data = [
   {
     id: 1,
@@ -51,6 +52,7 @@ const data = [
 
 ]
 function Category() {
+  const [loader, setLodaer] = useState(true)
   const [courseData, setCourseData] = useState([])
   console.log(courseData)
 
@@ -68,7 +70,10 @@ function Category() {
   useEffect(() => {
     fetch(`${http_api}/course/`)
       .then((res) => res.json())
-    .then((data)=> setCourseData(data))
+      .then((data) => setCourseData(data))
+      .then(() => {
+        setLodaer(false)
+      })
   },[])
   const categoryHandler = (e) => {
     selector({type: 'CATEGORY', payload: {'category': e}});
@@ -80,7 +85,11 @@ function Category() {
   }
   
 return (
-<div className='category'>
+  <>
+    {
+      loader ? <Lodading />:
+        
+  <div className='category'>
   <h2>Yonalish tanlang</h2>
     <ul className="category__list">
       {
@@ -99,6 +108,8 @@ return (
   </ul>
 
 </div>
+    }
+  </>
 )
 }
 

@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { http_api } from '../../api'
+import Lodading from '../../components/Lodading/Lodading'
+import Logical from '../../components/Logical/Logical'
 import Modal from '../../components/Modal/Modal'
 import Timer from '../../components/Timer/Timer'
 import { Data } from '../../Lib/data'
@@ -14,16 +16,24 @@ const answerDara = [
 
 
 function MainTest() {
+  const [loadedr, setLoadedr] = useState(true)
+  setTimeout(() => {
+    setLoadedr(false)
+  },1500)
   const [courseData, setCourseData] = useState([])
+  const [logicData, setLogicData] = useState([])
   const testData = Data.slice(0, courseData.length)
   testData.forEach((item) => {
-    answerDara.push({
-      id: item.id,
-      title: item.title,
-      answer: ''
-    })
+    if (!answerDara.find((k) => k.id == item.id)) {
+      answerDara.push({
+        id: item.id,
+        title: item.title,
+        answer: ''
+      })
+    }
   })
-  console.log(courseData);
+  console.log(answerDara);
+  console.log(testData);
   const navigate = useNavigate()
   const location = useLocation().pathname
   const selector = useDispatch()
@@ -41,6 +51,7 @@ function MainTest() {
   const testItemValue = (e) => {
     if (e.target.checked == true) {
       let finId = e.target.id.split('-')
+      console.log(finId);
       answerDara.find((variant) => variant.id == finId[0]).answer = finId[1]
       setAnswer(answerDara)
       setStep(answerDara)
@@ -49,30 +60,31 @@ function MainTest() {
     }
   }
   const dipach = useSelector((state) => state)
-  console.log(dipach.variants[0].apiCoursId);
+  console.log(dipach);
 
-  // useEffect(() => {
-  //   if (dipach.variants[0].category.length < 1) {
-  //     navigate('/')
-  //   }
-  // },[location])
+
   const testResult = () => {
     selector({ type: 'RESULT', payload: { 'result': answer } });
     console.log(dipach.variants);
   }
   useEffect(() => {
-    axios.get(`${http_api}/question?candidate_id=21`)
+    axios.get(`${http_api}/question?candidate_id=${dipach.variants[0].apiCoursId}`)
     .then(function (response) {
       setCourseData(response.data.course);
+      setLogicData(response.data.logic)
       console.log(response);
     })
     .catch(function (error) {
       console.log(error);
     });
-  },[])
-  console.log(courseData);
+    console.log(dipach.variants[0]?.apiCoursId);
+  },[loadedr])
+  
   
   return (
+    <>
+     {
+    loadedr ? <Lodading/> : 
     <div className='main__test'>
       <div className="main__test__header">
         <h3 className='main__test__title'>Kimyo</h3>
@@ -117,9 +129,11 @@ function MainTest() {
           ))
         }
       </ul>
-      {/* <button className='test__finsh__btn' onClick={testResult}>Yakunlash</button> */}
+            <Logical data={logicData } />
       <Modal resultFun={testResult} />
     </div>
+    }
+    </>
   )
 }
 

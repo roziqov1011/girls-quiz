@@ -7,6 +7,7 @@ import { http_api } from '../api';
 
 function Login() {
   const [val, setVal] = useState('')
+  const [userId, setUserId] = useState('')
   const navigate = useNavigate()
   const selector = useDispatch()
   if (val.match(/[a-z, A-Z]/g) == null) {
@@ -26,25 +27,11 @@ function Login() {
   console.log(dipach.variants);
   const userInfo = (e) => {
     e.preventDefault()
-    console.log(dipach);
-    navigate('/main-test')
+
     let val = e.target.elements
     selector({ type: 'INFO', payload: { 'fullName': val.fullName.value, 'phone': val.phone.value } });
 
 
-    // fetch('http://192.168.1.72:8000/api/registerCandidate/', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     course: dipach.variants[0].category,
-    //     name: val.fullName.value,
-    //     phone_number: val.phone.value
-    //   })
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data))
     var formdata = new FormData();
     formdata.append("course", dipach.variants[0].category);
     formdata.append("name", val.fullName.value);
@@ -52,8 +39,11 @@ function Login() {
 
     axios.post(`${http_api}/registerCandidate/`, formdata)
       .then(function (response) {
-        console.log(response.data.candidate_id.id)
+        setUserId(response.data.candidate_id.id)
         selector({ type: 'COURSEID', payload: { 'courseId': response.data.candidate_id.id } });;
+      })
+      .then(() => {
+        navigate('/main-test')
       })
       .catch(function (error) {
         console.log(error);
@@ -68,6 +58,7 @@ function Login() {
     console.log(obj)
   }
 
+  console.log(userId);
   // dangerouslySetInnerHTML = {{ __html: e.searchable }}
   return (
     <div className='login'>
