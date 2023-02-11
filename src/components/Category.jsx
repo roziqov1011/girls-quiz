@@ -54,7 +54,6 @@ const data = [
 function Category() {
   const [loader, setLodaer] = useState(true)
   const [courseData, setCourseData] = useState([])
-  console.log(courseData)
 
   const selector = useDispatch()
   const navigate = useNavigate()
@@ -78,10 +77,6 @@ function Category() {
   const categoryHandler = (e) => {
     selector({type: 'CATEGORY', payload: {'category': e}});
     navigate('/login');
-
-   
-    
-    
   }
   
 return (

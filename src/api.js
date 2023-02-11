@@ -1,2 +1,2 @@
-export const http_api = `https://dcity.uz/api`
-export const http = `https://dcity.uz`
+export const http_api = `https://ali98.uz/api`
+export const http = `https://ali98.uz`

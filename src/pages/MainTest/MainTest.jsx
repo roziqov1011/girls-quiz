@@ -32,14 +32,14 @@ function MainTest() {
       })
     }
   })
-  console.log(answerDara);
-  console.log(testData);
+  
   const navigate = useNavigate()
   const location = useLocation().pathname
-  const selector = useDispatch()
+  const dispatch = useDispatch()
   const [step, setStep] = useState([])
   const [answer, setAnswer] = useState([])
   const [render, setRender] = useState(0)
+  const dipach = useSelector((state) => state)
 
   useEffect(() => {
     setAnswer(answerDara)
@@ -51,33 +51,48 @@ function MainTest() {
   const testItemValue = (e) => {
     if (e.target.checked == true) {
       let finId = e.target.id.split('-')
-      console.log(finId);
       answerDara.find((variant) => variant.id == finId[0]).answer = finId[1]
       setAnswer(answerDara)
       setStep(answerDara)
       console.log(step);
       setRender(render + 1)
     }
+    dispatch({ type: 'RESULT', payload: { 'result': answer } });
   }
-  const dipach = useSelector((state) => state)
-  console.log(dipach);
-
-
+  const selector = useSelector((state) => state)
+  const row = {
+    candidate_id: 1,
+    resultData: [
+    ]
+}
   const testResult = () => {
-    selector({ type: 'RESULT', payload: { 'result': answer } });
-    console.log(dipach.variants);
+    row.candidate_id = selector.variants[0].apiCoursId
+    selector.variants[0].result.forEach((item) => {
+      row.resultData.push({id: item.id, answer: item.answer})
+    })
+    selector.variants[0].logic.forEach((item) => {
+      row.resultData.push({id: item.id, answer: item.answer})
+    })
+
+
+    fetch(`${http_api}/responseUserAnswer`, {
+      method: 'POST',
+      headers: {'Content-type': 'application/json'},
+      body: JSON.stringify(row)
+    })
+      .then((res) => res.json())
+    .then((data)=> console.log(data))
   }
   useEffect(() => {
-    axios.get(`${http_api}/question?candidate_id=${dipach.variants[0].apiCoursId}`)
+    axios.get(`${http_api}/question/?candidate_id=${selector.variants[0].apiCoursId}`)
     .then(function (response) {
       setCourseData(response.data.course);
       setLogicData(response.data.logic)
-      console.log(response);
     })
     .catch(function (error) {
       console.log(error);
     });
-    console.log(dipach.variants[0]?.apiCoursId);
+    
   },[loadedr])
   
   

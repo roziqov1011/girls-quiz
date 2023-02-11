@@ -1,34 +1,41 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import './Logical.scss'
 
-const myData = [
-  {
-    id: 1,
-    course_id:1,
-    query: '<p>djsahdasj</p>',
-  },
-  {
-    id: 2,
-    course_id:2,
-    query: '<p>sdsadasdasdsa</p>',
-  },
-  {
-    id: 3,
-    course_id:3,
-    query: '<p>sdsadasdasdsa</p>',
-  },
-]
+// const myData = [
+//   {
+//     id: 1,
+//     course_id:1,
+//     query: '<p>djsahdasj</p>',
+//   },
+//   {
+//     id: 2,
+//     course_id:2,
+//     query: '<p>sdsadasdasdsa</p>',
+//   },
+//   {
+//     id: 3,
+//     course_id:3,
+//     query: '<p>sdsadasdasdsa</p>',
+//   },
+// ]
 
-const logicStep = myData.map((item) => (
-  {
-    id: item.id,
-    answer: ''
-  }
-  ))
+// const logicStep = myData.map((item) => (
+//   {
+//     id: item.id,
+//     answer: ''
+//   }
+//   ))
 function Logical({ data }) {
+  const logicStep = data.map((item) => (
+    {
+      id: item.id,
+      answer: ''
+    }
+    ))
+  const dispatch = useDispatch()
   const [count, setCount] = useState(0)
   const [step, setStep] = useState([])
-  console.log(data);
   useEffect(() => {
     setStep(logicStep);
   }, [count])
@@ -36,12 +43,10 @@ function Logical({ data }) {
 
   const getLogicAnswer = (e) => {
     e.preventDefault()
-    console.log(e.target.id);
     setCount(count + 1)
     logicStep.find((item)=> item.id == e.target.id).answer = e.target.logicAnswer.value
-    console.log(logicStep);
     setStep(logicStep);
-
+    dispatch({ type: 'LOGIC', payload: { 'logic': logicStep } });
   }
   
   return (
@@ -61,7 +66,7 @@ function Logical({ data }) {
       </div>
       <ul className='logical__list'>
         {
-          myData && myData.map((item, index) => (
+          data && data.map((item, index) => (
             <li key={index} className='logical__item'>
               <span dangerouslySetInnerHTML = {{ __html:`<b>${item.id} </b>. ` + item.query }}></span>
               <form id={ item.id} onSubmit={ getLogicAnswer} action="#" >

@@ -1,46 +1,55 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import './Login.scss'
 import { http_api } from '../api';
 
 function Login() {
-  const [val, setVal] = useState('')
-  const [userId, setUserId] = useState('')
+  const [vall, setVal] = useState('')
+  const [invalid, setInvalid] = useState(false)
   const navigate = useNavigate()
-  const selector = useDispatch()
-  if (val.match(/[a-z, A-Z]/g) == null) {
-    console.log('ok');
-  } else {
-    console.log(false);
-  }
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const selector = useSelector((state) => state)
+  useEffect(() => {
+    if (!selector.variants[0].category) {
+      navigate('/')
+    }
+  },[location.pathname])
 
-  axios.get(`${http_api}/course/`)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  const dipach = useSelector((state) => state)
-  console.log(dipach.variants);
+  // axios.get(`${http_api}/course/`)
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+ 
   const userInfo = (e) => {
     e.preventDefault()
-
+    
     let val = e.target.elements
-    selector({ type: 'INFO', payload: { 'fullName': val.fullName.value, 'phone': val.phone.value } });
+    dispatch({ type: 'INFO', payload: { 'fullName': val.fullName.value, 'phone': val.phone.value } });
 
 
-    var formdata = new FormData();
-    formdata.append("course", dipach.variants[0].category);
+    let formdata = new FormData();
+    formdata.append("course", selector.variants[0].category);
     formdata.append("name", val.fullName.value);
     formdata.append("phone_number", val.phone.value);
 
-    axios.post(`${http_api}/registerCandidate/`, formdata)
+    
+   
+    console.log(vall.length)
+      if (vall.length < 12) {
+        setInvalid(true)
+        console.log('ok')
+      }
+    
+    if (vall.length === 12) {
+      axios.post(`${http_api}/registerCandidate/`, formdata)
       .then(function (response) {
-        setUserId(response.data.candidate_id.id)
-        selector({ type: 'COURSEID', payload: { 'courseId': response.data.candidate_id.id } });;
+        dispatch({ type: 'COURSEID', payload: { 'courseId': response.data.candidate_id.id } });;
       })
       .then(() => {
         navigate('/main-test')
@@ -48,26 +57,20 @@ function Login() {
       .catch(function (error) {
         console.log(error);
       });
-    let obj = {
-      course: dipach.variants[0].category,
-      name: val.fullName.value,
-      phone_number: val.phone.value
     }
 
-
-    console.log(obj)
   }
 
-  console.log(userId);
   // dangerouslySetInnerHTML = {{ __html: e.searchable }}
   return (
     <div className='login'>
       <h3>Ro'yxatdan o'tish</h3>
       <form action="#" onSubmit={userInfo} className='form'>
         <input type="text" placeholder='F.I.Sh' required name='fullName' />
-        <p className={val.match(/[a-z, A-Z]/g) ? 'warning_active' : 'warning_diseble'}>!Faqat raqam kiriting</p>
+        <p className={vall.length > 12 ?  'warning_active' : 'warning_diseble'}>!Raqam ko'p</p>
+        <p className={invalid ?  'warning_active' : 'warning_diseble'}>!Raqam to'liq emas</p>
         {/* <p className={val.length != 13 ? 'warning_active1': 'warning_diseble'}>Tel raqam notog'ri kiritildi</p> */}
-        <input type="tel" onChange={(e) => setVal(e.target.value)} placeholder='+998__ ___ __ __' defaultValue='+998' required name='phone' />
+        <input className='number' type="number" onChange={(e) => setVal(e.target.value)} placeholder='998__ ___ __ __' defaultValue='998' required name='phone' />
         <button type='submit'>Yuborish</button>
       </form>
     </div>

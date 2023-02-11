@@ -4,7 +4,8 @@ const initialState = [
         phone:'',
         category: '',
         apiCoursId: '',
-        result:undefined
+        result: undefined,
+        logic: undefined
     }
 ]
 
@@ -24,6 +25,9 @@ const Variants = (state=initialState, action) =>{
             return state;
         case 'COURSEID':
             state[0].apiCoursId = item.courseId
+            return state;
+        case 'LOGIC':
+            state[0].logic = item.logic
             return state
         default:
             return state
