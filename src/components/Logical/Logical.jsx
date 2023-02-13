@@ -54,7 +54,7 @@ function Logical({ data }) {
       <h2>Logical</h2>
 
       <div className="lStep__wrapper">
-        <h3>fan turi</h3>
+        <h3>Logical (2.1)</h3>
         <ul className='test__step__list'>
             {
               step && step.map((item, index) => (

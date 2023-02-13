@@ -39,8 +39,13 @@ function MainTest() {
   const [step, setStep] = useState([])
   const [answer, setAnswer] = useState([])
   const [render, setRender] = useState(0)
-  const dipach = useSelector((state) => state)
+  const selector = useSelector((state) => state)
 
+  useEffect(() => {
+    if (!selector.variants[0].fullName) {
+      navigate('/')
+    }
+  },[location])
   useEffect(() => {
     setAnswer(answerDara)
     setStep(answerDara)
@@ -59,7 +64,7 @@ function MainTest() {
     }
     dispatch({ type: 'RESULT', payload: { 'result': answer } });
   }
-  const selector = useSelector((state) => state)
+
   const row = {
     candidate_id: 1,
     resultData: [
@@ -95,6 +100,10 @@ function MainTest() {
     
   },[loadedr])
   
+  //default Content
+  {
+  
+  }
   
   return (
     <>
@@ -102,11 +111,11 @@ function MainTest() {
     loadedr ? <Lodading/> : 
     <div className='main__test'>
       <div className="main__test__header">
-        <h3 className='main__test__title'>Kimyo</h3>
+        <h3 className='main__test__title'>Dasturlash</h3>
 
         <Timer />
         <div className="test__step">
-          <h4>Kimyo (3.1)</h4>
+          <h4>Dastulash (3.1)</h4>
           <ul className='test__step__list'>
             {
               answer && answer.map((item, index) => (

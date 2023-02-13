@@ -2,13 +2,21 @@
   margin-top: 30px;
 
   h2 {
+    font-size: 33px;
     padding: 21px;
     text-align: center;
     background: rgba(0, 24, 244, 0.2);
-
+    font-weight: 600;
   }
 }
-
+.lStep__wrapper{
+h3{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+font-size: 24px;
+}
+}
 .logical__list {
   list-style-type: none;
   margin-top: 52px;

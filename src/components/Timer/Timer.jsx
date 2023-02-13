@@ -24,15 +24,15 @@ const renderTime = (dimension, time) => {
 const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
 const getTimeMinutes = (time) => ((time % hourSeconds) / minuteSeconds) | 0;
 const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
-const getTimeDays = (time) => (time / daySeconds) | 0;
+// const getTimeDays = (time) => (time / daySeconds) | 0;
 
 export default function Timer() {
-  const stratTime = Date.now() / 1000; // use UNIX timestamp in seconds
-  const endTime = stratTime + 243248; // use UNIX timestamp in seconds
+  // const stratTime = Date.now() / 1000; // use UNIX timestamp in seconds
+  // const endTime = stratTime + 243248; // use UNIX timestamp in seconds
 
-  const remainingTime = 60 * 60;
-  const days = Math.ceil(remainingTime / daySeconds);
-  const daysDuration = days * daySeconds;
+  const remainingTime = 70 * 60;
+  // const days = Math.ceil(remainingTime / daySeconds);
+  // const daysDuration = days * daySeconds;
 
   return (
     <div className="timer">
@@ -65,7 +65,7 @@ export default function Timer() {
       </CountdownCircleTimer>
       <CountdownCircleTimer
         {...timerProps}
-        colors="#EF798A"
+        colors="#0338f8"
         duration={hourSeconds}
         initialRemainingTime={remainingTime % hourSeconds}
         onComplete={(totalElapsedTime) => ({
