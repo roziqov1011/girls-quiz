@@ -72,10 +72,10 @@ function MainTest() {
 }
   const testResult = () => {
     row.candidate_id = selector.variants[0].apiCoursId
-    selector.variants[0].result.forEach((item) => {
+    selector.variants[0]?.result?.forEach((item) => {
       row.resultData.push({id: item.id, answer: item.answer})
     })
-    selector.variants[0].logic.forEach((item) => {
+    selector.variants[0]?.logic?.forEach((item) => {
       row.resultData.push({id: item.id, answer: item.answer})
     })
 
@@ -93,6 +93,7 @@ function MainTest() {
     .then(function (response) {
       setCourseData(response.data.course);
       setLogicData(response.data.logic)
+      console.log(response);
     })
     .catch(function (error) {
       console.log(error);

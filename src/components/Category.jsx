@@ -69,13 +69,17 @@ function Category() {
   useEffect(() => {
     fetch(`${http_api}/course/`)
       .then((res) => res.json())
-      .then((data) => setCourseData(data))
+      .then((data) => {
+        setCourseData(data)
+        console.log(data);
+      })
       .then(() => {
         setLodaer(false)
       })
   },[])
-  const categoryHandler = (e) => {
-    selector({type: 'CATEGORY', payload: {'category': e}});
+  const categoryHandler = (e, time) => {
+    console.log(time);
+    selector({type: 'CATEGORY', payload: {'category': e, 'time': time}});
     navigate('/login');
   }
   
@@ -88,8 +92,8 @@ return (
   <h2>Yonalish tanlang</h2>
     <ul className="category__list">
       {
-        courseData && courseData.map(({id, name, logo}) => (
-          <li onClick={()=> categoryHandler(id)} key={id} className='category__item'>
+        courseData && courseData.map(({id, name, logo, time}) => (
+          <li onClick={()=> categoryHandler(id, time)} key={id} className='category__item'>
             <img src={`${http+logo}`} alt="" />
             <p>{name}</p>
             <div className="shadow"></div>

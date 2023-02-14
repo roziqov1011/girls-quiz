@@ -5,7 +5,8 @@ const initialState = [
         category: '',
         apiCoursId: '',
         result: undefined,
-        logic: undefined
+        logic: undefined,
+        time: 0
     }
 ]
 
@@ -19,6 +20,7 @@ const Variants = (state=initialState, action) =>{
         
         case 'CATEGORY':
             state[0].category = item.category
+            state[0].time = item.time
             return state;
         case 'RESULT':
             state[0].result = item.result

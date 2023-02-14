@@ -13,3 +13,25 @@
     height: 100px !important;
   }
 }
+
+.Toastify{
+
+  .Toastify__toast{
+    height: 70px !important; 
+
+  }
+  .Toastify__toast-body{
+
+  height: 100% !important;
+  }
+  .Toastify__close-button{
+    width: 20px !important;
+    height: 20px !important;
+
+    svg{
+      width: 20px !important;
+      height: 20px !important;
+
+    }
+  }
+}
