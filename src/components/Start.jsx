@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Start.scss'
 import logo from '../assets/img/start-logo.png'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
 
 function Start() {
+ 
   const navigate = useNavigate()
+  
   const startHandler = () => {
     navigate('/category')
   }
+  
   return (
     <div className='start'>
       <img className='start__logo' src={logo} alt="logo" />

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import './Timer.scss'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 const minuteSeconds = 60;
 const hourSeconds = 3600;
@@ -29,31 +30,15 @@ const renderTime = (dimension, time) => {
 
 export default function Timer() {
   const selector = useSelector((state) => state)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [sec, setSec] = useState(0)
   const [min, setMin] = useState(0)
   const [hou, setHou] = useState(0)
   console.log(sec);
   console.log(min);
   console.log(hou);
-  useEffect(() => {
-    if (hou == 0 && min == 0 && sec == 59) {
-      toast.warn('Vaqt tugashiga 1 daqiqa qoldi', {
-        position: "top-left",
-        autoClose: 60000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
-      }
-    
-    if (hou == 0 && min == 0 && sec == 0) {
-    console.log('ok');
-    }
-      
-  }, [sec])
+  
 
   const getTimeSeconds = (time) => { setSec((minuteSeconds - time) | 0); return (minuteSeconds - time) | 0};
   const getTimeMinutes = (time) => { setMin(((time % hourSeconds) / minuteSeconds) | 0); return ((time % hourSeconds) / minuteSeconds) | 0};
@@ -61,22 +46,44 @@ export default function Timer() {
 
 
   // const remainingTime = selector.variants[0].time * 60;
-  const remainingTime = 1* 60;
+  const remainingTime = 0.1 * 60;
+  
+  useEffect(() => {
+    if (hou == 0 && min == 0 && sec == 59) {
+      toast.warn('Vaqt 1 daqiqa qoldi Yakunlash tugmasini bosing', {
+        position: "top-left",
+        autoClose: 60000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+      }
+    
+      if (hou == 0 && min == 0 && sec == 1) {
+        dispatch({ type: 'FINISH', payload: { 'timeFinish': true } });
+        console.log('manaman');
+      }
+      
+  }, [sec])
 
 
   return (
     <div className="timer">
+      
       <ToastContainer
       position="top-left"
-      autoClose={5000}
+      autoClose={60000}
       hideProgressBar={false}
       newestOnTop={false}
-      closeOnClick
+      closeOnClick={false}
       rtl={false}
-      pauseOnFocusLoss
+      pauseOnFocusLoss={false}
       draggable
-      pauseOnHover
-      theme="light"
+      pauseOnHover={false}
+      theme="dark"
       />
       {/* <CountdownCircleTimer
         {...timerProps}

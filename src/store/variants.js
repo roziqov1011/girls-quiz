@@ -6,7 +6,9 @@ const initialState = [
         apiCoursId: '',
         result: undefined,
         logic: undefined,
-        time: 0
+        time: 0,
+        findUser: false,
+        timeFinish: false
     }
 ]
 
@@ -16,6 +18,9 @@ const Variants = (state=initialState, action) =>{
         case 'INFO':
             state[0].fullName = item.fullName
             state[0].phone = item.phone
+            return state;
+        case 'FIND':
+            state[0].findUser = item.findUser
             return state;
         
         case 'CATEGORY':

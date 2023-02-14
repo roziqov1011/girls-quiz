@@ -1,14 +1,54 @@
-import { Route, Routes } from 'react-router-dom';
-import './App.css';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import './App.scss';
 import Category from './components/Category';
 import Login from './components/Login';
 import Start from './components/Start';
 import Home from './pages/Home/Home';
 import MainTest from './pages/MainTest/MainTest';
 import disableDevtool from'disable-devtool';
+import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 let elBody =  document.querySelector('body')
 function App() {
+  const endRef = useRef()
+  const selector = useSelector((state) => state)
+  const location = useLocation().pathname
+  useEffect(() => {
+    if (selector.variants[0].findUser && location == '/') {
+      toast.warn(`Siz test topshirib bo'lgansiz`, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+    // if (selector.variants[0].timeFinish && location == '/') {
+    //   toast.warn(`Siz testni qatida topshira olmadiz`, {
+    //     position: "top-left",
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: false,
+    //     pauseOnHover: false,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "dark",
+    //     });
+    // }
+  }, [location])
   
+  console.log(selector.variants[0].timeFinish);
+  setInterval(() => {
+    if (selector.variants[0].timeFinish) {
+      endRef.current.display = 'block'
+      console.log('ok');
+    }
+  }, 1000);
   // // TODO LOADER TAYYOR FACAT PROJECT TUGAGANDAN KEGIN OCHILADI COMMETAN
   // window.addEventListener('load', function () {
   
@@ -54,6 +94,21 @@ function App() {
 
   return (
     <div className="App">
+      <div ref={endRef} className="end__time">
+          <h2>Sizni vaqtingiz tugadi</h2>
+        </div>
+      <ToastContainer
+      position="top-left"
+      autoClose={60000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={false}
+      rtl={false}
+      pauseOnFocusLoss={false}
+      draggable
+      pauseOnHover={false}
+      theme="dark"
+      />
       <Routes>
         <Route path='/' element={<Home />} >
           <Route path='' element={<Start/> } />

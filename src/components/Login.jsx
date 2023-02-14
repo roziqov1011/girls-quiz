@@ -8,6 +8,7 @@ import { http_api } from '../api';
 function Login() {
   const [vall, setVal] = useState('')
   const [invalid, setInvalid] = useState(false)
+  const [login, setLogin] = useState(true)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const location = useLocation()
@@ -18,13 +19,7 @@ function Login() {
     }
   },[location.pathname])
 
-  // axios.get(`${http_api}/course/`)
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
+
  
   const userInfo = (e) => {
     e.preventDefault()
@@ -48,11 +43,18 @@ function Login() {
     
     if (vall.length === 12) {
       axios.post(`${http_api}/registerCandidate/`, formdata)
-      .then(function (response) {
-        dispatch({ type: 'COURSEID', payload: { 'courseId': response.data.candidate_id.id } });;
-      })
-      .then(() => {
-        navigate('/main-test')
+        .then(function (response) {
+          console.log(response?.data?.success);
+          if (response?.data?.success == false) {
+            dispatch({ type: 'FIND', payload: { 'findUser': true } })
+            navigate('/')
+          } else {
+            dispatch({ type: 'COURSEID', payload: { 'courseId': response?.data?.candidate_id?.id } })
+            setTimeout(() => {
+              navigate('/main-test')
+            },100)
+          }
+        
       })
       .catch(function (error) {
         console.log(error);
