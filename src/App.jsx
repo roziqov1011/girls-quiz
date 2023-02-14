@@ -42,13 +42,7 @@ function App() {
     // }
   }, [location])
   
-  console.log(selector.variants[0].timeFinish);
-  setInterval(() => {
-    if (selector.variants[0].timeFinish) {
-      endRef.current.display = 'block'
-      console.log('ok');
-    }
-  }, 1000);
+
   // // TODO LOADER TAYYOR FACAT PROJECT TUGAGANDAN KEGIN OCHILADI COMMETAN
   // window.addEventListener('load', function () {
   
