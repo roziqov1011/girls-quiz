@@ -1,5 +1,7 @@
 .logical {
+  margin: 0 auto;
   margin-top: 30px;
+  max-width: 1620px;
 
   h2 {
     font-size: 33px;
@@ -18,6 +20,8 @@ font-size: 24px;
 }
 }
 .logical__list {
+  max-width: 1275px;
+  margin: 0 auto;
   list-style-type: none;
   margin-top: 52px;
 }
