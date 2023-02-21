@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let elBody =  document.querySelector('body')
 function App() {
-  const endRef = useRef()
+
   const selector = useSelector((state) => state)
   const location = useLocation().pathname
   useEffect(() => {
@@ -88,9 +88,7 @@ function App() {
 
   return (
     <div className="App">
-      <div ref={endRef} className="end__time">
-          <h2>Sizni vaqtingiz tugadi</h2>
-        </div>
+      
       <ToastContainer
       position="top-left"
       autoClose={60000}

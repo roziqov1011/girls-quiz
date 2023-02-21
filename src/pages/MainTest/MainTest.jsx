@@ -17,6 +17,7 @@ const answerDara = [
 
 function MainTest() {
   const [loadedr, setLoadedr] = useState(true)
+  const [endTime, setEndTime] = useState(false)
   setTimeout(() => {
     setLoadedr(false)
   },1500)
@@ -93,7 +94,6 @@ function MainTest() {
     .then(function (response) {
       setCourseData(response.data.course);
       setLogicData(response.data.logic)
-      console.log(response);
     })
     .catch(function (error) {
       console.log(error);
@@ -101,10 +101,13 @@ function MainTest() {
     
   },[loadedr])
   
-  //default Content
   {
   
   }
+
+  useEffect(() => {
+    endTime ? window.scrollY = 0 :  window.scrollY = 100
+  },[])
   
   return (
     <>
@@ -114,7 +117,7 @@ function MainTest() {
       <div className="main__test__header">
         <h3 className='main__test__title'>Dasturlash</h3>
 
-        <Timer />
+        <Timer endState={setEndTime} />
         <div className="test__step">
           <h4>Dastulash (3.1)</h4>
           <ul className='test__step__list'>
@@ -154,8 +157,13 @@ function MainTest() {
           ))
         }
       </ul>
-            <Logical data={logicData } />
-      <Modal resultFun={testResult} />
+            <Logical data={logicData} />
+            {
+              endTime ? <button onClick={()=> navigate('/')} className="end__time">
+              Sizni vaqtingiz tugadi
+            </button> :<Modal  resultFun={testResult} />
+            }
+      
     </div>
     }
     </>

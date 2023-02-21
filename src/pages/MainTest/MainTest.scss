@@ -169,3 +169,37 @@ font-size: 24px;
 .item__variant__active{
   background: rgba(0, 24, 244, 0.2);
 }
+
+.end__time{
+ 
+  
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  color: #5E12DA;
+  background-color: #fff;
+  padding: 10px 25px;
+  margin: 0 auto;
+  margin-top: 10px;
+  border: none;
+  font-size: 30px;
+  animation: borderWarning 0.8s infinite linear both;
+  border: 2px solid #5E12DA;
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover{
+    background-color: #fff !important;
+    color: #5E12DA !important;
+  }
+  }
+
+  @keyframes borderWarning {
+    50%{
+      background: #5E12DA;
+      color: white;
+    }
+    100%{
+      background: white;
+      color: #5E12DA;;
+    }
+  }
