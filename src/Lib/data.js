@@ -78,5 +78,51 @@ export const Data = [
     id: 16,
     title: '5 + 6 = ? javobni toping',
     variant: ['A', 'B', 'C', 'D']
+  },
+  {
+    id: 17,
+    title: '5 + 6 = ? javobni toping',
+    variant: ['A', 'B', 'C', 'D']
+  },
+  {
+    id: 18,
+    title: '5 + 6 = ? javobni toping',
+    variant: ['A', 'B', 'C', 'D']
+  },
+  {
+    id: 19,
+    title: '5 + 6 = ? javobni toping',
+    variant: ['A', 'B', 'C', 'D']
+  },
+  {
+    id: 20,
+    title: '5 + 6 = ? javobni toping',
+    variant: ['A', 'B', 'C', 'D']
   }
+]
+export const category = [
+  {
+    id: 1,
+    name:'Backend'
+  },
+  {
+    id: 2,
+    name:'Grafik Dizayn'
+  },
+  {
+    id: 3,
+    name:'3D dizayn'
+  },
+  {
+    id: 6,
+    name:'SMM'
+  },
+  {
+    id: 7,
+    name:'Frontend'
+  },
+  {
+    id: 8,
+    name:'UX/UI'
+  },
 ]

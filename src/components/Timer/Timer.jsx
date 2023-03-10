@@ -45,12 +45,12 @@ export default function Timer({ endState }) {
 
 
   const remainingTime = selector.variants[0].time * 60;
-  console.log(selector.variants[0].time);
+  // console.log(selector.variants[0].time);
   // const remainingTime = 0.1 * 60;
   
   useEffect(() => {
     if (hou == 0 && min == 0 && sec == 59) {
-      toast.warn('Vaqt 1 daqiqa qoldi Yakunlash tugmasini bosing', {
+      toast.warn('1 daqiqa vaqt qoldi ', {
         position: "top-left",
         autoClose: 60000,
         hideProgressBar: false,
@@ -64,7 +64,6 @@ export default function Timer({ endState }) {
     
       if (hou == 0 && min == 0 && sec == 1) {
         dispatch({ type: 'FINISH', payload: { 'timeFinish': true } });
-        console.log('manaman');
         endState(true)
       }
       

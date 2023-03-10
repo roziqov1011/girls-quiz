@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './Logical.scss'
 
 // const myData = [
@@ -26,13 +26,17 @@ import './Logical.scss'
 //     answer: ''
 //   }
 //   ))
+const logicResult = []
+const logicData = []
 function Logical({ data }) {
+  // console.log(data);
   const logicStep = data.map((item) => (
     {
       id: item.id,
       answer: ''
     }
-    ))
+  ))
+  const selector = useSelector((state) => state)
   const dispatch = useDispatch()
   const [count, setCount] = useState(0)
   const [step, setStep] = useState([])
@@ -41,39 +45,47 @@ function Logical({ data }) {
   }, [count])
 
 
+ 
   const getLogicAnswer = (e) => {
     e.preventDefault()
-    setCount(count + 1)
-    logicStep.find((item)=> item.id == e.target.id).answer = e.target.logicAnswer.value
+    let obj = {id: e.target.id, answer: e.target.value}
+    logicStep.find((item)=> item.id == e.target.id).answer = e.target.value
     setStep(logicStep);
-    dispatch({ type: 'LOGIC', payload: { 'logic': logicStep } });
+    
+    if (logicResult.find((i) => i.id == obj.id)) {
+      logicResult.find((i) => i.id == obj.id).answer = obj.answer
+    } else {
+      logicResult.push(obj)
+    }
+    dispatch({ type: 'LOGIC', payload: { 'logic': logicResult } });
+    
+  
   }
   
   return (
     <div className='logical'>
-      <h2>Logical</h2>
+      <h2>Logical and DC</h2>
 
       <div className="lStep__wrapper">
-        <h3>Logical (2.1)</h3>
-        <ul className='test__step__list'>
+        <h3>Logical and DC (2.1)</h3>
+        {/* <ul className='test__step__list'>
             {
               step && step.map((item, index) => (
                 <li key={index} className={item.answer.length > 0 ? 'test__step__active' : 'test__step__item'}>{index}</li>
               ))
             }
 
-          </ul>
+          </ul> */}
       </div>
       <ul className='logical__list'>
         {
           data && data.map((item, index) => (
             <li key={index} className='logical__item'>
               <span dangerouslySetInnerHTML = {{ __html:`<b>${index + 1 } </b>. ` + item.query }}></span>
-              <form id={ item.id} onSubmit={ getLogicAnswer} action="#" >
-                <textarea name='logicAnswer'   placeholder='Javobingizni kiriting' >
+              <form  action="#" >
+                <textarea id={ item.id} onChange={getLogicAnswer} name='logicAnswer'   placeholder='Javobingizni kiriting' >
                 
                 </textarea>
-                <button type='submit' >Saqlash</button>
               </form>
             </li>
             ))

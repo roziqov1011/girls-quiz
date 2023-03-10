@@ -7,14 +7,15 @@ function Modal({ resultFun }) {
   
   const addMyClass = () => {
     resultFun()
-    setTimeout(() => {
-      window.reset()
-    },2000)
+   
     moConRef.current.classList.remove('out')
     moConRef.current.classList.add('one')
     document.querySelector('.body').classList.add('modal-active')
   }
   const removeMyClass = () => {
+    setTimeout(() => {
+      window.location.reload()
+    },1500)
     navigate('/')
     moConRef.current.classList.add('out')
     document.querySelector('.body').classList.remove('modal-active')

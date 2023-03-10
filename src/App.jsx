@@ -10,7 +10,8 @@ import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-let elBody =  document.querySelector('body')
+let elBody = document.querySelector('body')
+
 function App() {
 
   const selector = useSelector((state) => state)
@@ -84,7 +85,7 @@ function App() {
   //     event.stopPropagation();
   // }
 
-  // disableDevtool();
+  disableDevtool();
   return (
     <div className="App">
       

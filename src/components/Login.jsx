@@ -35,16 +35,16 @@ function Login() {
 
     
    
-    console.log(vall.length)
+    // console.log(vall.length)
       if (vall.length < 12) {
         setInvalid(true)
-        console.log('ok')
+        // console.log('ok')
       }
     
     if (vall.length === 12) {
       axios.post(`${http_api}/registerCandidate/`, formdata)
         .then(function (response) {
-          console.log(response?.data?.success);
+          // console.log(response?.data?.success);
           if (response?.data?.success == false) {
             dispatch({ type: 'FIND', payload: { 'findUser': true } })
             navigate('/')
@@ -57,7 +57,7 @@ function Login() {
         
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
     }
 

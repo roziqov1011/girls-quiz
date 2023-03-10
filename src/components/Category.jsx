@@ -75,14 +75,14 @@ function Category() {
       .then((res) => res.json())
       .then((data) => {
         setCourseData(data)
-        console.log(data);
+        //console.log(data);
       })
       .then(() => {
         setLodaer(false)
       })
   },[])
   const categoryHandler = (e, time) => {
-    console.log(time);
+    // console.log(time);
     selector({type: 'CATEGORY', payload: {'category': e, 'time': time}});
     navigate('/login');
   }
