@@ -7,7 +7,9 @@ function Modal({ resultFun }) {
   
   const addMyClass = () => {
     resultFun()
-   
+    setTimeout(() => {
+      window.location.reload()
+    },4000)
     moConRef.current.classList.remove('out')
     moConRef.current.classList.add('one')
     document.querySelector('.body').classList.add('modal-active')
