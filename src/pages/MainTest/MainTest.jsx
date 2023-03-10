@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { http_api } from '../../api'
+import { http, http_api } from '../../api'
 import Lodading from '../../components/Lodading/Lodading'
 import Logical from '../../components/Logical/Logical'
 import Modal from '../../components/Modal/Modal'
@@ -24,7 +24,7 @@ function MainTest() {
   const [courseData, setCourseData] = useState([])
   const [logicData, setLogicData] = useState([])
   const testData = Data.slice(0, courseData.length)
-  testData.forEach((item) => {
+  testData.forEach((item, index) => {
     if (!answerDara.find((k) => k.id == item.id)) {
       answerDara.push({
         id: item.id,
@@ -56,6 +56,7 @@ function MainTest() {
   }, [render])
   const testItemValue = (e) => {
     if (e.target.checked == true) {
+      console.log(e.target.id);
       let finId = e.target.id.split('-')
       answerDara.find((variant) => variant.id == finId[0]).answer = finId[1]
       setAnswer(answerDara)
@@ -73,15 +74,16 @@ function MainTest() {
 }
   const testResult = () => {
     row.candidate_id = selector.variants[0].apiCoursId
-    selector.variants[0]?.result?.forEach((item) => {
-      row.resultData.push({id: item.id, answer: item.answer})
+    selector.variants[0]?.result?.forEach((item, index) => {
+      row.resultData.push({id: courseData[index].id, answer: item.answer})
     })
-    selector.variants[0]?.logic?.forEach((item) => {
+    selector.variants[0]?.logic?.forEach((item, index) => {
       row.resultData.push({id: item.id, answer: item.answer})
     })
 
 
-    fetch(`${http_api}/responseUserAnswer`, {
+    console.log(row);
+    fetch(`${http_api}/responseUserAnswer/`, {
       method: 'POST',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify(row)
@@ -107,8 +109,9 @@ function MainTest() {
 
   useEffect(() => {
     endTime ? window.scrollY = 0 :  window.scrollY = 100
-  },[])
-  
+  }, [])
+
+  console.log(courseData);
   return (
     <>
      {
@@ -123,7 +126,7 @@ function MainTest() {
           <ul className='test__step__list'>
             {
               answer && answer.map((item, index) => (
-                <li key={index} className={step[index]?.answer.length > 0 ? 'test__step__active' : 'test__step__item'}>{index}</li>
+                <li key={index} className={step[index]?.answer.length > 0 ? 'test__step__active' : 'test__step__item'}>{index + 1}</li>
               ))
             }
 
@@ -134,22 +137,22 @@ function MainTest() {
         {
           testData && testData.map((item, index) => (
             <li key={item.id} className="test__item">
-              <p className='test__item__title' dangerouslySetInnerHTML = {{ __html:`${index+1}.`+ courseData[0]?.query }}></p>
+              <p className='test__item__title' dangerouslySetInnerHTML = {{ __html:`${index+1}.`+ courseData[index]?.query.replace('<p><img src="/', `<p><img src="${http}/`) }}></p>
               <form action='#' onClick={testItemValue} className="test__item__inner">
                 <span className={step[index]?.answer == item.variant[0] ? 'test__item__variant item__variant__active' : 'test__item__variant'}>
-                  <label htmlFor={item.id + '-' + item.variant[0]} dangerouslySetInnerHTML = {{ __html:'a).'+ courseData[0]?.optionA }}></label>
+                  <label htmlFor={item.id + '-' + item.variant[0]} dangerouslySetInnerHTML = {{ __html:'a).'+ courseData[index]?.optionA }}></label>
                   <input  id={item.id + '-' + item.variant[0]} type="radio" className='test__variant__input ' name={item.title} />
                 </span>
                 <span className={step[index]?.answer == item.variant[1] ? 'test__item__variant item__variant__active' : 'test__item__variant'}>
-                  <label htmlFor={item.id + '-' + item.variant[1]} dangerouslySetInnerHTML = {{ __html:'b).'+ courseData[0]?.optionB }}></label>
+                  <label htmlFor={item.id + '-' + item.variant[1]} dangerouslySetInnerHTML = {{ __html:'b).'+ courseData[index]?.optionB }}></label>
                   <input  id={item.id + '-' + item.variant[1]} type="radio" className='test__variant__input' name={item.title} />
                 </span>
                 <span className={step[index]?.answer == item.variant[2] ? 'test__item__variant item__variant__active' : 'test__item__variant'}>
-                  <label htmlFor={item.id + '-' + item.variant[2]} dangerouslySetInnerHTML = {{ __html:'c).'+ courseData[0]?.optionC }}></label>
+                  <label htmlFor={item.id + '-' + item.variant[2]} dangerouslySetInnerHTML = {{ __html:'c).'+ courseData[index]?.optionC }}></label>
                   <input  id={item.id + '-' + item.variant[2]} type="radio" className='test__variant__input' name={item.title} />
                 </span>
                 <span className={step[index]?.answer == item.variant[3] ? 'test__item__variant item__variant__active' : 'test__item__variant'}>
-                  <label htmlFor={item.id + '-' + item.variant[3]} dangerouslySetInnerHTML = {{ __html:'a).'+ courseData[0]?.optionD }}></label>
+                  <label htmlFor={item.id + '-' + item.variant[3]} dangerouslySetInnerHTML = {{ __html:'d).'+ courseData[index]?.optionD }}></label>
                   <input  id={item.id + '-' + item.variant[3]} type="radio" className='test__variant__input' name={item.title} />
                 </span>
               </form>

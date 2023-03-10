@@ -68,7 +68,7 @@ function Logical({ data }) {
         {
           data && data.map((item, index) => (
             <li key={index} className='logical__item'>
-              <span dangerouslySetInnerHTML = {{ __html:`<b>${item.id} </b>. ` + item.query }}></span>
+              <span dangerouslySetInnerHTML = {{ __html:`<b>${index + 1 } </b>. ` + item.query }}></span>
               <form id={ item.id} onSubmit={ getLogicAnswer} action="#" >
                 <textarea name='logicAnswer'   placeholder='Javobingizni kiriting' >
                 

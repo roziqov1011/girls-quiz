@@ -2,27 +2,27 @@
   padding: 50px 150px;
   font-family: 'Lexend';
   position: relative;
+  // background-color: red;
+ 
 }
 .main__test__header{
-  
-  padding: 50px 100px;
+  padding: 20px 100px;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
-  background: #fff ;
+  background: #ffff ;
 }
 .main__test__title {
   max-width: 1620px;
   margin: 0 auto;
   font-family: 'Lexend';
   text-align: center;
-  padding: 23px;
+  padding: 5px 0;
   background: rgba(0, 24, 244, 0.2);
   font-style: normal;
   font-weight: 400;
-  font-size: 50px;
-  line-height: 62px;
+  font-size: 40px;
   color: #000000;
 
 }
@@ -42,7 +42,6 @@
 }
 
 .test__step {
-  margin-top: 20px;
   max-width: 1620px;
   margin: 0 auto;
   display: flex;
@@ -51,8 +50,7 @@
   h4 {
     font-style: normal;
     font-weight: 400;
-    font-size: 32px;
-    line-height: 40px;
+    font-size: 25px;
     color: #000000;
   }
 }
@@ -101,22 +99,48 @@
 .test__item {
   margin-top: 50px;
   padding:  20px 0;
-  height: 308px;
   background: #FFFFFF;
   box-shadow: 0px 4px 20px rgba(11, 167, 191, 0.2);
+  .test__item__inner{
+    img{
+      width: 340px !important;
+      height: 280px !important;
+      margin: 20px  20px 20px 0;
+      object-fit: cover;
+    }
+  }
 }
+
 
 .test__item__title {
   display: flex;
-  align-items: center;
-  padding-left: 20px;
-  font-style: normal;
-font-weight: 300;
-font-size: 24px;
-line-height: 30px;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: start;
+  
+
+    p:first-child{
+      display: flex;
+      justify-content: start;
+      width: 90%;
+      margin-bottom: 20px;
+
+    }
+    padding-left: 20px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 30px;
   strong{
     font-size: 20px;
     font-weight: 600;
+  }
+  img{
+    width: 110px !important;
+    height: 110px !important;
+    object-fit: cover;
+    margin: 0 20px !important;
+
   }
 
 }

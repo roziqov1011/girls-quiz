@@ -60,10 +60,14 @@ function Category() {
   const location = useLocation().pathname
   const dipach = useSelector((state) => state)
   useEffect(() => {
-    if (false) {
-      navigate('/')
-    }
-  },[location])
+    fetch(`${http_api}/active`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success == false) {
+          navigate('/')
+        }
+      })
+  },[])
 
 
   useEffect(() => {
@@ -89,7 +93,7 @@ return (
       loader ? <Lodading />:
         
   <div className='category'>
-  <h2>Yonalish tanlang</h2>
+  <h2>Yo'nalish tanlang</h2>
     <ul className="category__list">
       {
         courseData && courseData.map(({id, name, logo, time}) => (

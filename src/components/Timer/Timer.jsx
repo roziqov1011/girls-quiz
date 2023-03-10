@@ -45,6 +45,7 @@ export default function Timer({ endState }) {
 
 
   const remainingTime = selector.variants[0].time * 60;
+  console.log(selector.variants[0].time);
   // const remainingTime = 0.1 * 60;
   
   useEffect(() => {
@@ -108,10 +109,11 @@ export default function Timer({ endState }) {
       >
         {({ elapsedTime, color }) => (
           <span style={{ color }}>
-            {renderTime("hours", getTimeHours(daySeconds - elapsedTime))}
+            {renderTime("", getTimeHours(daySeconds - elapsedTime))}
           </span>
         )}
       </CountdownCircleTimer>
+      :
       <CountdownCircleTimer
         {...timerProps}
         colors="#0338f8"
@@ -123,10 +125,11 @@ export default function Timer({ endState }) {
       >
         {({ elapsedTime, color }) => (
           <span style={{ color }}>
-            {renderTime("minutes", getTimeMinutes(hourSeconds - elapsedTime))}
+            {renderTime("", getTimeMinutes(hourSeconds - elapsedTime))}
           </span>
         )}
       </CountdownCircleTimer>
+      :
       <CountdownCircleTimer
         {...timerProps}
         colors="#218380"
@@ -138,7 +141,7 @@ export default function Timer({ endState }) {
       >
         {({ elapsedTime, color }) => (
           <span style={{ color }}>
-            {renderTime("seconds", getTimeSeconds(elapsedTime))}
+            {renderTime("", getTimeSeconds(elapsedTime))}
           </span>
         )}
       </CountdownCircleTimer>
