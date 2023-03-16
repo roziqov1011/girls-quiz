@@ -82,6 +82,7 @@ function Category() {
       })
   },[])
   const categoryHandler = (e, time) => {
+    
     // console.log(time);
     selector({type: 'CATEGORY', payload: {'category': e, 'time': time}});
     navigate('/login');

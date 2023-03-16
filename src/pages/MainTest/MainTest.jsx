@@ -15,7 +15,10 @@ const answerDara = [
 ]
 
 
-function MainTest() {
+function MainTest({upData}) {
+  useEffect(()=>{
+    upData.setUpdate(true)
+  },[])
   const [loadedr, setLoadedr] = useState(true)
   const [endTime, setEndTime] = useState(false)
   setTimeout(() => {
@@ -129,7 +132,7 @@ function MainTest() {
     <>
      {
     loadedr ? <Lodading/> : 
-    <div className='main__test'>
+    <div className='main__test' >
       <div className="main__test__header">
               <h3 className='main__test__title'>{title}</h3>
 
