@@ -12,6 +12,18 @@ const initialState = [
     }
 ]
 
+const un = {
+    fullName: '',
+    phone:'',
+    category: '',
+    apiCoursId: '',
+    result: undefined,
+    logic: undefined,
+    time: 0,
+    findUser: false,
+    timeFinish: false
+}
+
 const Variants = (state=initialState, action) =>{
     let item = action.payload
     switch (action.type) {
@@ -24,6 +36,7 @@ const Variants = (state=initialState, action) =>{
             return state;
         
         case 'CATEGORY':
+            state[0]  = un
             state[0].category = item.category
             state[0].time = item.time
             return state;

@@ -88,7 +88,8 @@ function App() {
   disableDevtool();
   return (
     <div className="App">
-      
+      {
+      location == '/'? 
       <ToastContainer
       position="top-left"
       autoClose={60000}
@@ -100,7 +101,9 @@ function App() {
       draggable
       pauseOnHover={false}
       theme="dark"
-      />
+      />: null
+      }
+      
       <Routes>
         <Route path='/' element={<Home />} >
           <Route path='' element={<Start/> } />

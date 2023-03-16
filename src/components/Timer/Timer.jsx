@@ -46,13 +46,13 @@ export default function Timer({ endState }) {
 
   const remainingTime = selector.variants[0].time * 60;
   // console.log(selector.variants[0].time);
-  // const remainingTime = 0.1 * 60;
+  // const remainingTime = 1.5 * 60;
   
   useEffect(() => {
     if (hou == 0 && min == 0 && sec == 59) {
       toast.warn('1 daqiqa vaqt qoldi ', {
         position: "top-left",
-        autoClose: 60000,
+        autoClose: 55000,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: false,
@@ -65,6 +65,19 @@ export default function Timer({ endState }) {
       if (hou == 0 && min == 0 && sec == 1) {
         dispatch({ type: 'FINISH', payload: { 'timeFinish': true } });
         endState(true)
+        toast.warn('Vaqt tugadi ', {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setTimeout(() => {
+          window.location.reload()
+        },5000)
       }
       
   }, [sec])
@@ -74,29 +87,8 @@ export default function Timer({ endState }) {
     <div className="timer">
       
       <ToastContainer
-      position="top-left"
-      autoClose={60000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick={false}
-      rtl={false}
-      pauseOnFocusLoss={false}
-      draggable
-      pauseOnHover={false}
-      theme="dark"
       />
-      {/* <CountdownCircleTimer
-        {...timerProps}
-        colors="#7E2E84"
-        duration={daysDuration}
-        initialRemainingTime={remainingTime}
-      >
-        {({ elapsedTime, color }) => (
-          <span style={{ color }}>
-            {renderTime("days", getTimeDays(daysDuration - elapsedTime))}
-          </span>
-        )}
-      </CountdownCircleTimer> */}
+
       <CountdownCircleTimer
         {...timerProps}
         colors="#D14081"
