@@ -79,7 +79,6 @@ export default function Timer({ endState }) {
           window.location.reload()
         },5000)
       }
-      
   }, [sec])
 
 

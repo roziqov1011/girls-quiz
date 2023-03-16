@@ -10,12 +10,18 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
 let elBody = document.querySelector('body')
 
 function App() {
-  const [update, setUpdate] = useState(0)
+  const [update, setUpdate] = useState(false)
   const selector = useSelector((state) => state)
   const location = useLocation().pathname
+  useEffect(()=>{
+    if(update && location  !== 'main-test'){
+      window.location.reload()
+    }
+  }, [location])
   useEffect(() => {
     if (selector.variants[0].findUser && location == '/') {
       toast.warn(`Siz test topshirib bo'lgansiz`, {
@@ -109,10 +115,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} >
           <Route path='' element={<Start/> } />
-          <Route path='category' element={<Category data={{update, setUpdate}} /> } />
+          <Route path='category' element={<Category /> } />
           <Route path='login' element={<Login/> } />
         </Route>
-        <Route path='/main-test' element={<MainTest/> } />
+        <Route path='/main-test' element={<MainTest upData={{update, setUpdate}}/> } />
       </Routes>
     </div>
   );
