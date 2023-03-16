@@ -63,6 +63,7 @@ function Category() {
     fetch(`${http_api}/active`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data.success);
         if (data.success == false) {
           navigate('/')
         }

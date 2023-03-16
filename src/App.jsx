@@ -6,14 +6,14 @@ import Start from './components/Start';
 import Home from './pages/Home/Home';
 import MainTest from './pages/MainTest/MainTest';
 import disableDevtool from'disable-devtool';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 let elBody = document.querySelector('body')
 
 function App() {
-
+  const [update, setUpdate] = useState(0)
   const selector = useSelector((state) => state)
   const location = useLocation().pathname
   useEffect(() => {
@@ -42,6 +42,8 @@ function App() {
     //     });
     // }
   }, [location])
+
+
   
 
   // // // TODO LOADER TAYYOR FACAT PROJECT TUGAGANDAN KEGIN OCHILADI COMMETAN
@@ -85,7 +87,7 @@ function App() {
   //     event.stopPropagation();
   // }
 
-  disableDevtool();
+  // disableDevtool();
   return (
     <div className="App">
       {
@@ -107,7 +109,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} >
           <Route path='' element={<Start/> } />
-          <Route path='category' element={<Category/> } />
+          <Route path='category' element={<Category data={{update, setUpdate}} /> } />
           <Route path='login' element={<Login/> } />
         </Route>
         <Route path='/main-test' element={<MainTest/> } />

@@ -10,7 +10,7 @@ function Start() {
   const navigate = useNavigate()
   
   const startHandler = () => {
-    navigate('/category')
+      navigate('/category')
   }
   
   return (
